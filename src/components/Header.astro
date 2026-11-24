@@ -127,6 +127,11 @@ import { whatsapp } from '../data/contato';
     text-transform: uppercase;
   }
 
+  nav a {
+    min-inline-size: 2.75rem;
+    justify-content: center;
+  }
+
   nav {
     display: flex;
     flex-wrap: wrap;
@@ -149,7 +154,7 @@ import { whatsapp } from '../data/contato';
     color: var(--amarelo);
   }
 
-  .link-contato {
+  nav .link-contato {
     display: none;
   }
 
@@ -215,11 +220,15 @@ import { whatsapp } from '../data/contato';
       border-bottom: 1px solid var(--linha);
     }
 
+    .site-header[data-menu-pronto] nav a {
+      justify-content: flex-start;
+    }
+
     .site-header[data-menu-pronto] nav a + a {
       border-top: 1px solid var(--linha);
     }
 
-    .link-contato {
+    nav .link-contato {
       display: inline-flex;
     }
 
