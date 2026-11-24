@@ -1,0 +1,35 @@
+:root {
+  color-scheme: dark;
+  --grafite: #242322;
+  --painel: #2b2827;
+  --processo: #282526;
+  --texto: #f3f0eb;
+  --suave: #c3bdb9;
+  --lavanda: #c4a9d7;
+  --ardosia: #30363b;
+  --amarelo: #f2d34f;
+  --foco: #ffe478;
+  --linha: rgb(255 255 255 / 16%);
+  --borda-controle: #817777;
+  --raio: 0.5rem;
+
+  --fonte: Arial, Helvetica, sans-serif;
+  --titulo-secao: clamp(2.5rem, 6.2vw, 5.375rem);
+  --largura: 82.5rem;
+  --margem: clamp(2rem, 3.89vw, 3.5rem);
+  --respiro: clamp(4rem, 6vw, 5.5rem);
+}
+
+@media (max-width: 900px) {
+  :root {
+    --margem: 1.25rem;
+    --respiro: 2.625rem;
+    --titulo-secao: clamp(2.5rem, 9vw, 4.125rem);
+  }
+}
+
+@media (max-width: 350px) {
+  :root {
+    --margem: 1rem;
+  }
+}
