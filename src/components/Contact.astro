@@ -1,0 +1,71 @@
+---
+import { whatsapp } from '../data/contato';
+---
+<section class="contato" id="contato" aria-labelledby="titulo-contato">
+  <div class="shell">
+    <p class="indice">05 / Contato</p>
+    <h2 id="titulo-contato">Vamos criar<br /> <em>algo juntos?</em></h2>
+    <div class="contato-acoes">
+      <p>Seu negócio tem uma história para apresentar. Eu posso ajudar a transformá-la em um site com identidade própria.</p>
+      <a class="botao botao-primario contato-link" href={whatsapp.url} target="_blank" rel="noopener noreferrer">
+        <span>Falar no WhatsApp<span class="telefone">{whatsapp.telefone}</span></span>
+        <span class="seta" aria-hidden="true">↗</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contato {
+    padding-block: clamp(2.5rem, 5vw, 4.25rem);
+    background: radial-gradient(ellipse at bottom right, #504a44, transparent 62%), linear-gradient(120deg, #3d3936, #363331);
+  }
+
+  .indice {
+    border-bottom: 1px solid var(--linha);
+    padding-block-end: 1rem;
+  }
+
+  h2 {
+    margin-block: clamp(1.375rem, 2.7vw, 2.375rem);
+    font-size: clamp(3rem, 8vw, 6.875rem);
+    letter-spacing: -0.067em;
+    line-height: 0.95;
+  }
+
+  em {
+    color: var(--amarelo);
+    font-style: normal;
+  }
+
+  .contato-acoes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.25rem 2.5rem;
+  }
+
+  .contato-acoes p {
+    max-width: 28rem;
+    color: var(--suave);
+  }
+
+  .contato-link {
+    justify-content: space-between;
+    gap: 1.25rem;
+    min-height: 3.25rem;
+    padding: 0.625rem 1rem;
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+  }
+
+  .telefone {
+    display: block;
+    margin-block-start: 0.125rem;
+    font-size: 0.8125rem;
+  }
+
+  .seta {
+    font-size: 1.25rem;
+  }
+</style>
