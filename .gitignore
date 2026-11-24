@@ -4,6 +4,7 @@ dist/
 .taste-skill/
 materiais/
 capturas-candidatas/
+evidencias/
 .env
 .env.*
 *.log
