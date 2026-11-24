@@ -1,0 +1,22 @@
+---
+const titulo = 'Joaquim Moura — Desenvolvedor de Sites';
+const descricao = 'Joaquim Moura, desenvolvedor de sites. Projetos digitais personalizados para empresas que querem apresentar seus serviços com clareza e identidade.';
+---
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={descricao} />
+    <meta name="theme-color" content="#242322" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:title" content={titulo} />
+    <meta property="og:description" content={descricao} />
+    <title>{titulo}</title>
+  </head>
+  <body id="inicio">
+    <a class="skip-link" href="#principal">Pular para o conteúdo</a>
+    <slot />
+  </body>
+</html>
