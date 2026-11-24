@@ -1,0 +1,125 @@
+---
+import { whatsapp } from '../data/contato';
+---
+<header class="site-header">
+  <div class="shell barra">
+    <a class="marca" href="#inicio" aria-label="Joaquim Moura, voltar ao início">
+      <span class="monograma" aria-hidden="true">JM<span>/</span></span>
+      <span class="assinatura" aria-hidden="true">Joaquim Moura</span>
+    </a>
+    <nav id="menu-principal" aria-label="Navegação principal">
+      <a href="#projetos">Projetos</a>
+      <a href="#sobre">Sobre</a>
+      <a href="#processo">Processo</a>
+      <a class="link-contato" href="#contato">Contato</a>
+    </nav>
+    <a class="header-contato" href={whatsapp.url} target="_blank" rel="noopener noreferrer">
+      Vamos conversar <span aria-hidden="true">↗</span>
+    </a>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: relative;
+    z-index: 2;
+    background: var(--grafite);
+    border-bottom: 1px solid var(--linha);
+  }
+
+  .barra {
+    min-height: 4.6875rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0 2rem;
+  }
+
+  .marca, nav a, .header-contato {
+    display: inline-flex;
+    min-block-size: 2.75rem;
+    align-items: center;
+    text-decoration: none;
+  }
+
+  .marca {
+    gap: 1rem;
+  }
+
+  .monograma {
+    font-size: 1.75rem;
+    font-weight: 800;
+    letter-spacing: -0.12em;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .monograma span {
+    margin-inline-start: 0.25rem;
+    color: var(--amarelo);
+    font-weight: 500;
+  }
+
+  .assinatura {
+    font-size: 0.625rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 1.5rem;
+    margin-inline-start: auto;
+    font-size: 0.875rem;
+  }
+
+  .header-contato {
+    justify-content: center;
+    gap: 1rem;
+    padding: 0.55rem 0.875rem;
+    border: 1px solid var(--borda-controle);
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+    font-weight: 700;
+  }
+
+  .header-contato span {
+    color: var(--amarelo);
+  }
+
+  .link-contato {
+    display: none;
+  }
+
+  @media (max-width: 900px) {
+    .barra {
+      min-height: 3.9375rem;
+      column-gap: 0.75rem;
+    }
+
+    .marca {
+      gap: 0.875rem;
+    }
+
+    .monograma {
+      font-size: 1.625rem;
+    }
+
+    nav {
+      flex-basis: 100%;
+      gap: 0 1rem;
+      margin: 0;
+    }
+
+    .link-contato {
+      display: inline-flex;
+    }
+
+    .header-contato {
+      display: none;
+    }
+  }
+</style>
