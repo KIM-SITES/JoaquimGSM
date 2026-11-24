@@ -1,0 +1,167 @@
+---
+import type { ImageMetadata } from 'astro';
+import { projetos, type ProjetoId } from '../data/projetos';
+import fase from '../assets/projetos/fase-forma.webp';
+import lamina from '../assets/projetos/lamina.webp';
+import entrear from '../assets/projetos/entrear.webp';
+
+const imagens = { 'fase-forma': fase, lamina, entrear } satisfies Record<ProjetoId, ImageMetadata>;
+---
+<section class="projetos" id="projetos" aria-labelledby="titulo-projetos">
+  <div class="shell">
+    <div class="cabecalho-secao">
+      <p class="indice">02 / Projetos</p>
+      <div class="projetos-intro">
+        <h2 class="titulo-secao" id="titulo-projetos">O trabalho<br /> <em>fala por mim.</em></h2>
+        <p>Três projetos demonstrativos, três identidades diferentes. Uma amostra de como penso design, comunicação e experiência para cada negócio.</p>
+      </div>
+    </div>
+
+    <ul class="galeria" role="list">
+      {projetos.map((projeto) => {
+        const { src, width, height } = imagens[projeto.id];
+        return (
+          <li class:list={{ destaque: projeto.id === 'fase-forma' }}>
+            <article>
+              <a class="projeto" href={projeto.url} target="_blank" rel="noopener noreferrer"
+                aria-labelledby={projeto.id + '-nome ' + projeto.id + '-nova-aba'}>
+                <div class="captura">
+                  <img src={src} width={width} height={height} alt={projeto.alt} loading="lazy" decoding="async" />
+                </div>
+                <div class="legenda">
+                  <div>
+                    {projeto.demonstrativo && <p class="tipo">Projeto demonstrativo</p>}
+                    <h3 id={projeto.id + '-nome'}>{projeto.nome}</h3>
+                    <p class="descricao">{projeto.segmento} {projeto.descricao}</p>
+                  </div>
+                  <span class="seta-projeto" aria-hidden="true">↗</span>
+                  <span class="somente-leitura" id={projeto.id + '-nova-aba'}>(abre em nova aba)</span>
+                </div>
+              </a>
+            </article>
+          </li>
+        );
+      })}
+    </ul>
+    <p class="nota">Estes são estudos de portfólio criados para demonstrar abordagens visuais e funcionais em setores diferentes.</p>
+  </div>
+</section>
+
+<style>
+  .projetos {
+    padding-block: var(--respiro);
+    background: radial-gradient(ellipse at top right, #382f3b80, transparent 54%), var(--grafite);
+  }
+
+  .projetos-intro {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.875rem 2rem;
+  }
+
+  .projetos-intro em {
+    font-style: normal;
+    color: var(--lavanda);
+  }
+
+  .projetos-intro p {
+    max-width: 19.5rem;
+    color: var(--suave);
+  }
+
+  .galeria {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2.625rem 1.5rem;
+    border-top: 1px solid var(--linha);
+    padding: 2rem 0 0;
+    margin: 2rem 0 0;
+    list-style: none;
+  }
+
+  .destaque {
+    grid-column: 1 / -1;
+  }
+
+  .projeto {
+    display: block;
+    border-radius: var(--raio);
+    text-decoration: none;
+  }
+
+  .captura {
+    overflow: hidden;
+    border: 1px solid var(--linha);
+    border-radius: var(--raio);
+    background: var(--painel);
+  }
+
+  .captura img {
+    width: 100%;
+    height: auto;
+  }
+
+  .legenda {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: start;
+    gap: 0.625rem;
+    padding-block-start: 0.875rem;
+  }
+
+  .tipo {
+    color: var(--lavanda);
+    font-weight: 700;
+    font-size: 0.6875rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+  }
+
+  h3 {
+    margin-block: 0.25rem;
+    font-size: clamp(1.3125rem, 2.1vw, 1.75rem);
+    line-height: 1.15;
+    letter-spacing: -0.035em;
+    overflow-wrap: anywhere;
+  }
+
+  .descricao, .nota {
+    color: var(--suave);
+    font-size: 0.9375rem;
+  }
+
+  .seta-projeto {
+    inline-size: 2.75rem;
+    block-size: 2.75rem;
+    border: 1px solid var(--borda-controle);
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-size: 1.25rem;
+  }
+
+  .nota {
+    margin-block-start: 2.125rem;
+    max-width: 36rem;
+  }
+
+  @media (max-width: 900px) {
+    .projetos-intro p {
+      max-width: 33rem;
+    }
+
+    .galeria {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 1.875rem;
+      padding-block-start: 0;
+      margin-block-start: 1.5rem;
+      border-top: 0;
+    }
+
+    .nota {
+      margin-block-start: 1.5rem;
+    }
+  }
+</style>
