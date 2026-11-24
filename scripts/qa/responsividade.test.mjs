@@ -23,6 +23,7 @@ test('larguras, paisagem, imagens e console em Chrome, Firefox e WebKit', async 
           try {
             const response = await page.goto(url);
             assert.equal(response?.status(), 200);
+            await page.evaluate(() => document.fonts.ready.then(() => true));
             await page.locator('.retrato').evaluate((image) => image.decode());
             const layout = await page.evaluate(() => {
               const foto = document.querySelector('.retrato');
@@ -73,6 +74,10 @@ test('larguras, paisagem, imagens e console em Chrome, Firefox e WebKit', async 
             if (width === 390) {
               const [principal, secundario] = await page.locator('.acoes a').all();
               assert.equal((await principal.boundingBox()).y, (await secundario.boundingBox()).y, 'CTAs devem caber na mesma linha em 390px');
+            }
+            if (width === 768) {
+              const acoes = await page.locator('.acoes').boundingBox();
+              assert.ok(acoes.y + acoes.height <= height, 'CTAs devem aparecer na abertura em 768×1024');
             }
 
             const nomeCaptura = nome === 'Chrome' && new Map([[390, 'mobile'], [768, 'tablet'], [1440, 'desktop'], [1920, 'widescreen']]).get(width);
