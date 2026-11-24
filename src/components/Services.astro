@@ -1,0 +1,75 @@
+---
+const servicos = [
+  'Sites institucionais',
+  'Landing pages',
+  'Apresentação de serviços',
+  'Experiências responsivas',
+];
+---
+<section class="servicos" id="sobre" aria-labelledby="titulo-servicos">
+  <div class="shell cabecalho-secao">
+    <p class="indice">03 / O que eu faço</p>
+    <div>
+      <h2 class="titulo-secao" id="titulo-servicos">O seu negócio<br /> merece <em>mais que</em><br /> um site qualquer.</h2>
+      <p>Desenvolvo páginas que unem clareza, personalidade e uma navegação intuitiva. Cada projeto nasce das necessidades reais da empresa, sem fórmulas prontas.</p>
+      <ol class="servicos-lista" role="list">
+        {servicos.map((servico, index) => (
+          <li><span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span> {servico}</li>
+        ))}
+      </ol>
+    </div>
+  </div>
+</section>
+
+<style>
+  .servicos {
+    padding-block: var(--respiro);
+    border-block: 1px solid var(--linha);
+    background: linear-gradient(140deg, #2c292b, var(--ardosia));
+  }
+
+  h2 {
+    --titulo-secao: clamp(2.5rem, 5.8vw, 5rem);
+  }
+
+  h2 em {
+    color: var(--amarelo);
+    font-style: normal;
+  }
+
+  h2 + p {
+    max-width: 39rem;
+    margin-block: 1.375rem 1.875rem;
+    color: var(--suave);
+  }
+
+  .servicos-lista {
+    max-width: 44rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-top: 1px solid var(--linha);
+  }
+
+  li {
+    display: grid;
+    grid-template-columns: 2.25rem minmax(0, 1fr);
+    align-items: baseline;
+    padding-block: 1rem;
+    border-bottom: 1px solid var(--linha);
+    font-size: clamp(1.0625rem, 1.65vw, 1.3125rem);
+  }
+
+  li span {
+    color: var(--lavanda);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+  }
+
+  @media (max-width: 900px) {
+    h2 {
+      --titulo-secao: clamp(2.5rem, 9vw, 4.125rem);
+    }
+  }
+</style>
