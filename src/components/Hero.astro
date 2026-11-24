@@ -88,4 +88,56 @@ import { whatsapp } from '../data/contato';
       justify-content: space-between;
     }
   }
+
+  @media (width > 900px) {
+    .hero {
+      display: grid;
+      align-items: start;
+      min-height: max(clamp(36.875rem, 52vw, 49.375rem), 36vw);
+      background: #302e2b;
+      isolation: isolate;
+    }
+
+    .hero::before {
+      position: absolute;
+      z-index: 0;
+      inset: 0;
+      background: linear-gradient(90deg, #1c1b1af0, #242220d9 22%, #2826249e 36%, #28262438 48%, transparent 58%);
+      pointer-events: none;
+      content: '';
+    }
+
+    .hero-conteudo {
+      padding-block: clamp(4.5rem, 4.85vw, 6rem) 5rem;
+    }
+
+    .apresentacao {
+      max-width: min(48%, 38rem);
+    }
+
+    .identificacao {
+      gap: 0.625rem;
+      font-size: 0.6875rem;
+      letter-spacing: 0.15em;
+    }
+
+    h1 {
+      margin-block: 1.8125rem 2.625rem;
+      font-size: clamp(4.375rem, 8.4vw, 8.25rem);
+      line-height: 0.88;
+      letter-spacing: -0.075em;
+    }
+
+    h2 {
+      font-size: clamp(2rem, 3vw, 2.75rem);
+    }
+
+    .descricao {
+      max-width: 25rem;
+    }
+
+    .acoes {
+      margin-block-start: 1.25rem;
+    }
+  }
 </style>
