@@ -1,0 +1,93 @@
+---
+const etapas = [
+  { nome: 'Conversa', descricao: 'Entendo sua empresa, seus serviços e o que você precisa comunicar.' },
+  { nome: 'Direção', descricao: 'Definimos o conteúdo, a estrutura e a linguagem visual do projeto.' },
+  { nome: 'Construção', descricao: 'Desenvolvo o site com atenção à navegação, responsividade e desempenho.' },
+  { nome: 'Entrega', descricao: 'Validamos os ajustes combinados e disponibilizo a versão final online.' },
+];
+---
+<section class="processo" id="processo" aria-labelledby="titulo-processo">
+  <div class="shell">
+    <div class="cabecalho-secao">
+      <p class="indice">04 / Processo</p>
+      <h2 class="titulo-secao" id="titulo-processo">Do primeiro<br /> “oi” ao site no ar<span>.</span></h2>
+    </div>
+    <ol class="etapas" role="list">
+      {etapas.map(({ nome, descricao }, index) => (
+        <li>
+          <span class="numero" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+          <h3>{nome}</h3>
+          <p>{descricao}</p>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .processo {
+    background: var(--processo);
+    padding-block: var(--respiro);
+  }
+
+  h2 {
+    letter-spacing: -0.06em;
+  }
+
+  h2 span {
+    color: var(--amarelo);
+  }
+
+  .etapas {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.75rem;
+    list-style: none;
+    padding: 0;
+    margin: 2.375rem 0 0;
+  }
+
+  li {
+    padding: clamp(0.875rem, 2vw, 1.375rem);
+    border: 1px solid var(--linha);
+    border-radius: var(--raio);
+    background: rgb(255 255 255 / 1.2%);
+  }
+
+  .numero {
+    display: block;
+    margin-block-end: 0.75rem;
+    color: var(--lavanda);
+    font-size: clamp(1.875rem, 2.65vw, 2.375rem);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.05em;
+  }
+
+  h3 {
+    margin-block-end: 0.375rem;
+    font-size: clamp(1.125rem, 1.8vw, 1.5rem);
+    letter-spacing: -0.035em;
+    overflow-wrap: anywhere;
+  }
+
+  li p {
+    max-width: 25ch;
+    color: var(--suave);
+    font-size: 0.9375rem;
+  }
+
+  @media (max-width: 900px) {
+    .etapas {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.625rem;
+      margin-block-start: 1.5rem;
+    }
+  }
+
+  @media (max-width: 350px) {
+    .etapas {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>
