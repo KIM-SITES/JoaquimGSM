@@ -43,7 +43,7 @@ img {
   outline-offset: 4px;
 }
 
-main:focus-visible {
+main:focus-visible, section[tabindex="-1"]:focus-visible {
   outline-offset: -3px;
 }
 
