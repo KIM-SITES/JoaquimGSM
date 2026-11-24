@@ -14,7 +14,8 @@
     "test": "node --test scripts/qa/*.test.mjs",
     "capturar": "node scripts/capturar-projetos.mjs",
     "qa:destinos": "node scripts/qa/destinos.mjs",
-    "qa:desempenho": "node scripts/qa/desempenho.mjs"
+    "qa:desempenho": "node scripts/qa/desempenho.mjs",
+    "otimizar:capturas": "node scripts/otimizar-capturas.mjs"
   },
   "dependencies": {
     "astro": "7.4.13"

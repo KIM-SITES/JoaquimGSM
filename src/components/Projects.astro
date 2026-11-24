@@ -4,8 +4,25 @@ import { projetos, type ProjetoId } from '../data/projetos';
 import fase from '../assets/projetos/fase-forma.webp';
 import lamina from '../assets/projetos/lamina.webp';
 import entrear from '../assets/projetos/entrear.webp';
+import fase640 from '../assets/projetos/fase-forma-640.webp';
+import fase960 from '../assets/projetos/fase-forma-960.webp';
+import lamina640 from '../assets/projetos/lamina-640.webp';
+import lamina960 from '../assets/projetos/lamina-960.webp';
+import entrear640 from '../assets/projetos/entrear-640.webp';
+import entrear960 from '../assets/projetos/entrear-960.webp';
 
-const imagens = { 'fase-forma': fase, lamina, entrear } satisfies Record<ProjetoId, ImageMetadata>;
+const imagens = {
+  'fase-forma': [fase640, fase960, fase],
+  lamina: [lamina640, lamina960, lamina],
+  entrear: [entrear640, entrear960, entrear],
+} satisfies Record<ProjetoId, [ImageMetadata, ImageMetadata, ImageMetadata]>;
+
+const largurasMobile = '(max-width: 350px) calc(100vw - 32px), (max-width: 900px) calc(100vw - 40px), ';
+const larguraDesktop = '100vw - 2 * clamp(32px, 3.89vw, 56px)';
+const tamanhos = {
+  destaque: largurasMobile + '(min-width: 1432px) 1320px, calc(' + larguraDesktop + ')',
+  comum: largurasMobile + '(min-width: 1432px) 648px, calc((' + larguraDesktop + ' - 24px) / 2)',
+};
 ---
 <section class="projetos" id="projetos" aria-labelledby="titulo-projetos">
   <div class="shell">
@@ -19,14 +36,17 @@ const imagens = { 'fase-forma': fase, lamina, entrear } satisfies Record<Projeto
 
     <ul class="galeria" role="list">
       {projetos.map((projeto) => {
-        const { src, width, height } = imagens[projeto.id];
+        const variantes = imagens[projeto.id];
+        const { src, width, height } = variantes[2];
+        const fontes = variantes.map((imagem) => imagem.src + ' ' + imagem.width + 'w').join(', ');
+        const destaque = projeto.id === 'fase-forma';
         return (
-          <li class:list={{ destaque: projeto.id === 'fase-forma' }}>
+          <li class:list={{ destaque }}>
             <article>
               <a class="projeto" href={projeto.url} target="_blank" rel="noopener noreferrer"
                 aria-labelledby={projeto.id + '-nome ' + projeto.id + '-nova-aba'}>
                 <div class="captura">
-                  <img src={src} width={width} height={height} alt={projeto.alt} loading="lazy" decoding="async" />
+                  <img src={src} srcset={fontes} sizes={destaque ? tamanhos.destaque : tamanhos.comum} width={width} height={height} alt={projeto.alt} loading="lazy" decoding="async" />
                 </div>
                 <div class="legenda">
                   <div>
