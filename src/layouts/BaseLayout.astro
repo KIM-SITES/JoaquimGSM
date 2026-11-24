@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import { retrato } from '../data/retrato';
 const titulo = 'Joaquim Moura — Desenvolvedor de Sites';
 const descricao = 'Joaquim Moura, desenvolvedor de sites. Projetos digitais personalizados para empresas que querem apresentar seus serviços com clareza e identidade.';
 const canonica = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : undefined;
@@ -32,6 +33,7 @@ const capaAlt = 'Joaquim Moura, desenvolvedor de sites, ao lado de seu retrato.'
     <meta name="twitter:image" content={capa} />
     <meta name="twitter:image:alt" content={capaAlt} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preload" as="image" imagesrcset={retrato.srcset} imagesizes={retrato.sizes} fetchpriority="high" />
     <link rel="preload" href="/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
     <title>{titulo}</title>
   </head>
