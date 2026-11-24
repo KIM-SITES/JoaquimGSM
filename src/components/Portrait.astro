@@ -18,13 +18,14 @@ import { retrato } from '../data/retrato';
 
   @media (width > 900px) {
     .retrato {
-      grid-area: 1 / 2;
-      align-self: center;
-      justify-self: end;
-      width: min(100%, 64rem);
-      aspect-ratio: 4 / 3;
+      position: absolute;
+      inset: 0 0 0 auto;
+      width: 91%;
+      height: 100%;
       object-fit: cover;
-      object-position: center;
+      object-position: right top;
+      /* A borda esquerda se dissolve sob o degradê do hero. */
+      mask-image: linear-gradient(to right, transparent, #000 16%);
     }
   }
 </style>

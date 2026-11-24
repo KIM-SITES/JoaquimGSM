@@ -106,22 +106,28 @@ import { whatsapp } from '../data/contato';
   @media (width > 900px) {
     .hero {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
       align-items: start;
-      min-height: max(clamp(36.875rem, 52vw, 49.375rem), min(43.5vw, 52.25rem));
-      background: linear-gradient(110deg, var(--grafite) 30%, #302e2b);
+      min-height: max(clamp(36.875rem, 52vw, 49.375rem), 43.5vw);
+      background: #302e2b;
+      isolation: isolate;
+    }
+
+    .hero::before {
+      position: absolute;
+      z-index: 1;
+      inset: 0;
+      background: linear-gradient(90deg, #1c1b1af0, #242220d9 22%, #2826249e 36%, #28262438 48%, transparent 58%);
+      pointer-events: none;
+      content: '';
     }
 
     .hero-conteudo {
-      grid-area: 1 / 1;
-      width: auto;
-      margin-inline: 0;
+      z-index: 2;
       padding-block: clamp(4.5rem, 4.85vw, 6rem) 5rem;
-      padding-inline: max(var(--margem), (100vw - var(--largura)) / 2) 1rem;
     }
 
     .apresentacao {
-      max-width: 38rem;
+      max-width: min(48%, 38rem);
     }
 
     .identificacao {

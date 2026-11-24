@@ -28,8 +28,11 @@ test('larguras, paisagem, imagens e console em Chrome, Firefox e WebKit', async 
             const layout = await page.evaluate(() => {
               const foto = document.querySelector('.retrato');
               const conteudo = document.querySelector('.hero-conteudo');
+              const hero = foto.closest('.hero');
               const caixa = foto.getBoundingClientRect();
+              const caixaHero = hero.getBoundingClientRect();
               const caixaTexto = conteudo.getBoundingClientRect();
+              const estiloFoto = getComputedStyle(foto);
               const larguraFotoRenderizada = Math.max(caixa.width, caixa.height * foto.naturalWidth / foto.naturalHeight);
               const excesso = [...document.querySelectorAll('h1, h2, h3, p:not(.skip-link), nav a, .botao')]
                 .filter((element) => {
@@ -50,12 +53,14 @@ test('larguras, paisagem, imagens e console em Chrome, Firefox e WebKit', async 
                 largura: document.documentElement.scrollWidth,
                 excesso,
                 proporcao: caixa.width / caixa.height,
-                encaixe: getComputedStyle(foto).objectFit,
-                posicaoDaFoto: getComputedStyle(foto).objectPosition,
-                filtro: getComputedStyle(foto).filter,
+                encaixe: estiloFoto.objectFit,
+                filtro: estiloFoto.filter,
                 fotoAcima: caixa.bottom <= caixaTexto.top + 0.5,
-                fotoADireita: caixa.left >= caixaTexto.right - 0.5,
-                escalaFoto: larguraFotoRenderizada / foto.closest('.hero').clientWidth,
+                fotoComoFundo: Math.abs(caixa.top - caixaHero.top) < 0.5 &&
+                  Math.abs(caixa.bottom - caixaHero.bottom) < 0.5 &&
+                  Math.abs(caixa.right - caixaHero.right) < 0.5,
+                transicaoFoto: estiloFoto.maskImage,
+                escalaFoto: larguraFotoRenderizada / caixaHero.width,
                 prioridade: foto.getAttribute('fetchpriority'),
                 animacao: getComputedStyle(conteudo).animationName,
               };
@@ -72,9 +77,11 @@ test('larguras, paisagem, imagens e console em Chrome, Firefox e WebKit', async 
               assert.equal(await page.locator('.menu-toggle').isVisible(), true);
             } else {
               assert.equal(layout.encaixe, 'cover');
-              assert.equal(layout.posicaoDaFoto, '50% 50%');
-              assert.equal(layout.fotoADireita, true, 'retrato deve ficar na coluna à direita do texto');
-              assert.ok(layout.escalaFoto < 0.75, 'retrato desktop deve manter o enquadramento mais aberto');
+              assert.equal(layout.fotoComoFundo, true, 'retrato desktop deve acompanhar toda a altura do hero');
+              assert.match(layout.transicaoFoto, /^linear-gradient\(/, 'a esquerda do retrato deve se integrar ao fundo');
+              if (width >= 1280) {
+                assert.ok(layout.escalaFoto >= 0.85 && layout.escalaFoto <= 0.95, 'redução moderada da escala do retrato');
+              }
               assert.equal(await page.locator('.menu-toggle').isVisible(), false);
               assert.equal(await page.locator('nav .link-contato').isVisible(), false);
             }
