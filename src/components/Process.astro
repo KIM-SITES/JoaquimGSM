@@ -8,11 +8,11 @@ const etapas = [
 ---
 <section class="processo" id="processo" aria-labelledby="titulo-processo">
   <div class="shell">
-    <div class="cabecalho-secao">
+    <div class="cabecalho-secao" data-revelar>
       <p class="indice">04 / Processo</p>
       <h2 class="titulo-secao" id="titulo-processo">Do primeiro<br /> “oi” ao site no ar<span>.</span></h2>
     </div>
-    <ol class="etapas" role="list">
+    <ol class="etapas" role="list" data-revelar>
       {etapas.map(({ nome, descricao }, index) => (
         <li>
           <span class="numero" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>

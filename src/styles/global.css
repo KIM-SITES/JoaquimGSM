@@ -10,7 +10,7 @@ body {
   margin: 0;
   background: var(--grafite);
   color: var(--texto);
-  font: 1rem / 1.55 var(--fonte);
+  font: 1rem / 1.6 var(--fonte);
 }
 
 h1, h2, h3, p {
@@ -67,8 +67,9 @@ main:focus-visible, section[tabindex="-1"]:focus-visible {
 
 .titulo-secao {
   font-size: var(--titulo-secao);
-  letter-spacing: -0.063em;
-  line-height: 0.99;
+  font-weight: 750;
+  letter-spacing: -0.058em;
+  line-height: 1.01;
   text-wrap: balance;
 }
 

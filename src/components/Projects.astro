@@ -20,13 +20,13 @@ const imagens = {
 const largurasMobile = '(max-width: 350px) calc(100vw - 32px), (max-width: 900px) calc(100vw - 40px), ';
 const larguraDesktop = '100vw - 2 * clamp(32px, 3.89vw, 56px)';
 const tamanhos = {
-  destaque: largurasMobile + '(min-width: 1432px) 1320px, calc(' + larguraDesktop + ')',
-  comum: largurasMobile + '(min-width: 1432px) 648px, calc((' + larguraDesktop + ' - 24px) / 2)',
+  destaque: largurasMobile + '(min-width: 1432px) 756px, calc((' + larguraDesktop + ' - 24px) * 7 / 12)',
+  comum: largurasMobile + '(min-width: 1432px) 540px, calc((' + larguraDesktop + ' - 24px) * 5 / 12)',
 };
 ---
 <section class="projetos" id="projetos" aria-labelledby="titulo-projetos">
   <div class="shell">
-    <div class="cabecalho-secao">
+    <div class="cabecalho-secao" data-revelar>
       <p class="indice">02 / Projetos</p>
       <div class="projetos-intro">
         <h2 class="titulo-secao" id="titulo-projetos">O trabalho<br /> <em>fala por mim.</em></h2>
@@ -43,7 +43,7 @@ const tamanhos = {
         return (
           <li class:list={{ destaque }}>
             <article class="cartao-projeto">
-              <div class="captura">
+              <div class="captura" data-revelar="imagem">
                 <img src={src} srcset={fontes} sizes={destaque ? tamanhos.destaque : tamanhos.comum} width={width} height={height} alt={projeto.alt} loading="lazy" decoding="async" />
               </div>
               <div class="legenda">
@@ -56,7 +56,7 @@ const tamanhos = {
                   </h3>
                   <p class="descricao">{projeto.segmento} {projeto.descricao}</p>
                 </div>
-                <span class="seta-projeto" aria-hidden="true">↗</span>
+                <span class="acessar-projeto" aria-hidden="true">Acessar site <span class="seta-projeto">↗</span></span>
               </div>
             </article>
           </li>
@@ -70,7 +70,9 @@ const tamanhos = {
 <style>
   .projetos {
     padding-block: var(--respiro);
-    background: radial-gradient(ellipse at top right, #382f3b80, transparent 54%), var(--grafite);
+    background:
+      radial-gradient(ellipse at 88% 18%, color-mix(in srgb, var(--roxo-profundo) 55%, transparent), transparent 66%),
+      linear-gradient(var(--grafite), #2b292b);
   }
 
   .projetos-intro {
@@ -93,8 +95,8 @@ const tamanhos = {
 
   .galeria {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 2.625rem 1.5rem;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: 2.5rem 1.5rem;
     border-top: 1px solid var(--linha);
     padding: 2rem 0 0;
     margin: 2rem 0 0;
@@ -102,7 +104,8 @@ const tamanhos = {
   }
 
   .destaque {
-    grid-column: 1 / -1;
+    grid-row: span 2;
+    align-self: center;
   }
 
   .cartao-projeto {
@@ -117,7 +120,7 @@ const tamanhos = {
   .projeto::after {
     position: absolute;
     inset: 0;
-    border-radius: var(--raio);
+    border-radius: 0.25rem;
     content: '';
   }
 
@@ -133,7 +136,7 @@ const tamanhos = {
   .captura {
     overflow: hidden;
     border: 1px solid var(--linha);
-    border-radius: var(--raio);
+    border-radius: 0.25rem;
     background: var(--painel);
   }
 
@@ -145,8 +148,8 @@ const tamanhos = {
   .legenda {
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto;
-    align-items: start;
-    gap: 0.625rem;
+    align-items: end;
+    gap: 0.375rem 1rem;
     padding-block-start: 0.875rem;
   }
 
@@ -160,7 +163,7 @@ const tamanhos = {
 
   h3 {
     margin-block: 0.25rem;
-    font-size: clamp(1.3125rem, 2.1vw, 1.75rem);
+    font-size: clamp(1.3125rem, 2vw, 1.75rem);
     line-height: 1.15;
     letter-spacing: -0.035em;
     overflow-wrap: anywhere;
@@ -171,14 +174,19 @@ const tamanhos = {
     font-size: 0.9375rem;
   }
 
+  .acessar-projeto {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.375rem;
+    color: var(--texto);
+    font-size: 0.8125rem;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
   .seta-projeto {
-    inline-size: 2.75rem;
-    block-size: 2.75rem;
-    border: 1px solid var(--borda-controle);
-    border-radius: 50%;
-    display: grid;
-    place-items: center;
-    font-size: 1.25rem;
+    color: var(--lavanda);
+    font-size: 0.9375rem;
   }
 
   .nota {
@@ -193,7 +201,7 @@ const tamanhos = {
 
     .galeria {
       grid-template-columns: minmax(0, 1fr);
-      gap: 1.875rem;
+      gap: 2.125rem;
       padding-block-start: 0;
       margin-block-start: 1.5rem;
       border-top: 0;
@@ -201,6 +209,16 @@ const tamanhos = {
 
     .nota {
       margin-block-start: 1.5rem;
+    }
+
+    .destaque {
+      grid-row: auto;
+    }
+  }
+
+  @media (max-width: 430px) {
+    .legenda {
+      grid-template-columns: minmax(0, 1fr);
     }
   }
 </style>

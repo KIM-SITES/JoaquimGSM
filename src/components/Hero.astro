@@ -12,8 +12,8 @@ import { whatsapp } from '../data/contato';
       <h2>Sites que dão<br /> <em>presença</em> às ideias.</h2>
       <p class="descricao">Sou desenvolvedor de sites. Crio experiências digitais personalizadas para empresas que querem apresentar melhor o que fazem.</p>
       <div class="acoes">
-        <a class="botao botao-primario" href="#projetos">Conheça meus projetos <span aria-hidden="true">↗</span></a>
-        <a class="botao botao-secundario" href={whatsapp.url} target="_blank" rel="noopener noreferrer">Falar comigo <span aria-hidden="true">↗</span></a>
+        <a class="botao botao-primario" href="#projetos">Conheça meus projetos <span class="seta-acao" aria-hidden="true">↓</span></a>
+        <a class="botao botao-secundario" href={whatsapp.url} target="_blank" rel="noopener noreferrer">WhatsApp <span class="seta-acao" aria-hidden="true">↗</span></a>
       </div>
     </div>
   </div>
@@ -52,8 +52,8 @@ import { whatsapp } from '../data/contato';
   h1 {
     margin-block: 1.4375rem 1.8125rem;
     font-size: clamp(3.1875rem, 11vw, 5.5rem);
-    font-weight: 750;
-    letter-spacing: -0.065em;
+    font-weight: 760;
+    letter-spacing: -0.061em;
     line-height: 0.92;
   }
 
@@ -96,6 +96,13 @@ import { whatsapp } from '../data/contato';
     }
   }
 
+  @media (600px <= width <= 900px) {
+    h1 {
+      margin-block: 1rem 1.25rem;
+      font-size: clamp(3.625rem, 9.4vw, 5.5rem);
+    }
+  }
+
   @media (width > 900px) {
     .hero {
       display: grid;
@@ -133,7 +140,7 @@ import { whatsapp } from '../data/contato';
       margin-block: 1.8125rem 2.625rem;
       font-size: clamp(4.375rem, 8.4vw, 8.25rem);
       line-height: 0.88;
-      letter-spacing: -0.075em;
+      letter-spacing: -0.067em;
     }
 
     h2 {

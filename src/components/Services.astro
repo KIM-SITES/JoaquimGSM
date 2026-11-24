@@ -10,7 +10,7 @@ const servicos = [
   <div class="shell cabecalho-secao">
     <p class="indice">03 / O que eu faço</p>
     <div>
-      <h2 class="titulo-secao" id="titulo-servicos">O seu negócio<br /> merece <em>mais que</em><br /> um site qualquer.</h2>
+      <h2 class="titulo-secao" id="titulo-servicos" data-revelar>O seu negócio<br /> merece <em>mais que</em><br /> um site qualquer.</h2>
       <p>Desenvolvo páginas que unem clareza, personalidade e uma navegação intuitiva. Cada projeto nasce das necessidades reais da empresa, sem fórmulas prontas.</p>
       <ol class="servicos-lista" role="list">
         {servicos.map((servico, index) => (
@@ -25,7 +25,7 @@ const servicos = [
   .servicos {
     padding-block: var(--respiro);
     border-block: 1px solid var(--linha);
-    background: linear-gradient(140deg, #2c292b, var(--ardosia));
+    background: linear-gradient(132deg, #2c292b 20%, color-mix(in srgb, var(--azul-acinzentado) 66%, #2c292b));
   }
 
   h2 {
