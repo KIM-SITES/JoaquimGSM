@@ -26,7 +26,7 @@ try {
     const esperado = destinos[index] ?? 'api.whatsapp.com';
     if (index < destinos.length) {
       assert.equal(new URL(nome).host, esperado);
-      assert.match(await link.getAttribute('aria-labelledby'), /nova-aba/);
+      assert.match(await link.textContent(), /abre em nova aba/);
     }
     assert.equal(await link.getAttribute('target'), '_blank');
     assert.match(await link.getAttribute('rel'), /noopener noreferrer/);

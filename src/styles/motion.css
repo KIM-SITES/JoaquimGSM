@@ -12,7 +12,7 @@
     color: var(--amarelo);
   }
 
-  .projeto:hover h3 {
+  .cartao-projeto:hover .projeto {
     text-decoration: underline;
     text-underline-offset: 0.18em;
   }
@@ -42,15 +42,15 @@
     transform: translateY(1px);
   }
 
-  .projeto img, .seta-projeto {
+  .cartao-projeto img, .seta-projeto {
     transition: transform 200ms ease-out;
   }
 
-  .projeto:hover img {
+  .cartao-projeto:hover img {
     transform: scale(1.015);
   }
 
-  .projeto:hover .seta-projeto {
+  .cartao-projeto:hover .seta-projeto {
     transform: translate(2px, -2px);
   }
 }

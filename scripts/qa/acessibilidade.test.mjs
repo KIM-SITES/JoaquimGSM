@@ -67,7 +67,8 @@ test('axe WCAG 2.2 AA, estrutura e alvos em desktop e mobile', async () => {
   const browser = await chromium.launch(navegadores[0].opcoes);
   try {
     for (const width of [320, 390, 1440]) {
-      const page = await browser.newPage({ viewport: { width, height: 900 }, reducedMotion: 'reduce' });
+      const context = await browser.newContext({ viewport: { width, height: 900 }, reducedMotion: 'reduce' });
+      const page = await context.newPage();
       await page.goto(url);
       assert.equal(await page.locator('h1').count(), 1);
       assert.equal(await page.locator('main > section').count(), 5);
@@ -76,13 +77,13 @@ test('axe WCAG 2.2 AA, estrutura e alvos em desktop e mobile', async () => {
       const resultado = await new AxeBuilder({ page })
         .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'])
         .analyze();
-      const alvos = await page.locator('a:visible:not(.skip-link), button:visible').evaluateAll((elements) =>
+      const alvos = await page.locator('a:visible:not(.skip-link, .projeto), .cartao-projeto:visible, button:visible').evaluateAll((elements) =>
         elements.filter((element) => {
           const { width, height } = element.getBoundingClientRect();
           return width < 44 || height < 44;
         }).map((element) => element.textContent.trim()));
       resultadosAxe.push({ width, regrasAprovadas: resultado.passes.length, violacoes: resultado.violations, itensManuais: resultado.incomplete.map(({ id }) => id), alvos });
-      await page.close();
+      await context.close();
     }
     await salvarRelatorio('acessibilidade.json', resultadosAxe);
     for (const { width, violacoes, alvos } of resultadosAxe) {

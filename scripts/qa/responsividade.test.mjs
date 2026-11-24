@@ -69,7 +69,7 @@ test('larguras, paisagem, imagens e console em Chrome, Firefox e WebKit', async 
 
             const nomeCaptura = nome === 'Chrome' && new Map([[390, 'mobile'], [768, 'tablet'], [1440, 'desktop']]).get(width);
             if (nomeCaptura) await page.screenshot({ path: resolve(evidencias, nomeCaptura + '-hero.png') });
-            const cards = await page.locator('.projeto img').all();
+            const cards = await page.locator('.captura img').all();
             assert.equal(cards.length, 3);
             for (const imagem of cards) {
               assert.equal(await imagem.getAttribute('loading'), 'lazy');

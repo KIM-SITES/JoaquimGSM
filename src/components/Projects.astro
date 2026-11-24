@@ -42,22 +42,22 @@ const tamanhos = {
         const destaque = projeto.id === 'fase-forma';
         return (
           <li class:list={{ destaque }}>
-            <article>
-              <a class="projeto" href={projeto.url} target="_blank" rel="noopener noreferrer"
-                aria-labelledby={projeto.id + '-nome ' + projeto.id + '-nova-aba'}>
-                <div class="captura">
-                  <img src={src} srcset={fontes} sizes={destaque ? tamanhos.destaque : tamanhos.comum} width={width} height={height} alt={projeto.alt} loading="lazy" decoding="async" />
+            <article class="cartao-projeto">
+              <div class="captura">
+                <img src={src} srcset={fontes} sizes={destaque ? tamanhos.destaque : tamanhos.comum} width={width} height={height} alt={projeto.alt} loading="lazy" decoding="async" />
+              </div>
+              <div class="legenda">
+                <div>
+                  {projeto.demonstrativo && <p class="tipo">Projeto demonstrativo</p>}
+                  <h3>
+                    <a class="projeto" href={projeto.url} target="_blank" rel="noopener noreferrer">
+                      {projeto.nome}<span class="somente-leitura"> (abre em nova aba)</span>
+                    </a>
+                  </h3>
+                  <p class="descricao">{projeto.segmento} {projeto.descricao}</p>
                 </div>
-                <div class="legenda">
-                  <div>
-                    {projeto.demonstrativo && <p class="tipo">Projeto demonstrativo</p>}
-                    <h3 id={projeto.id + '-nome'}>{projeto.nome}</h3>
-                    <p class="descricao">{projeto.segmento} {projeto.descricao}</p>
-                  </div>
-                  <span class="seta-projeto" aria-hidden="true">↗</span>
-                  <span class="somente-leitura" id={projeto.id + '-nova-aba'}>(abre em nova aba)</span>
-                </div>
-              </a>
+                <span class="seta-projeto" aria-hidden="true">↗</span>
+              </div>
             </article>
           </li>
         );
@@ -105,10 +105,29 @@ const tamanhos = {
     grid-column: 1 / -1;
   }
 
+  .cartao-projeto {
+    position: relative;
+  }
+
   .projeto {
-    display: block;
-    border-radius: var(--raio);
     text-decoration: none;
+  }
+
+  /* A área clicável acompanha o card. O link continua nomeado pelo título. */
+  .projeto::after {
+    position: absolute;
+    inset: 0;
+    border-radius: var(--raio);
+    content: '';
+  }
+
+  .projeto:focus-visible {
+    outline: none;
+  }
+
+  .projeto:focus-visible::after {
+    outline: 3px solid var(--foco);
+    outline-offset: 4px;
   }
 
   .captura {
