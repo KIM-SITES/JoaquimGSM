@@ -29,6 +29,8 @@ test('larguras, paisagem, imagens e console em Chrome, Firefox e WebKit', async 
               const foto = document.querySelector('.retrato');
               const conteudo = document.querySelector('.hero-conteudo');
               const caixa = foto.getBoundingClientRect();
+              const caixaTexto = conteudo.getBoundingClientRect();
+              const larguraFotoRenderizada = Math.max(caixa.width, caixa.height * foto.naturalWidth / foto.naturalHeight);
               const excesso = [...document.querySelectorAll('h1, h2, h3, p:not(.skip-link), nav a, .botao')]
                 .filter((element) => {
                   if (!element.getClientRects().length) return false;
@@ -49,8 +51,11 @@ test('larguras, paisagem, imagens e console em Chrome, Firefox e WebKit', async 
                 excesso,
                 proporcao: caixa.width / caixa.height,
                 encaixe: getComputedStyle(foto).objectFit,
+                posicaoDaFoto: getComputedStyle(foto).objectPosition,
                 filtro: getComputedStyle(foto).filter,
-                fotoAcima: caixa.bottom <= conteudo.getBoundingClientRect().top + 0.5,
+                fotoAcima: caixa.bottom <= caixaTexto.top + 0.5,
+                fotoADireita: caixa.left >= caixaTexto.right - 0.5,
+                escalaFoto: larguraFotoRenderizada / foto.closest('.hero').clientWidth,
                 prioridade: foto.getAttribute('fetchpriority'),
                 animacao: getComputedStyle(conteudo).animationName,
               };
@@ -67,7 +72,9 @@ test('larguras, paisagem, imagens e console em Chrome, Firefox e WebKit', async 
               assert.equal(await page.locator('.menu-toggle').isVisible(), true);
             } else {
               assert.equal(layout.encaixe, 'cover');
-              assert.ok(layout.proporcao <= 1 / 0.43 + 0.01, 'enquadramento preserva o rosto inteiro');
+              assert.equal(layout.posicaoDaFoto, '50% 50%');
+              assert.equal(layout.fotoADireita, true, 'retrato deve ficar na coluna à direita do texto');
+              assert.ok(layout.escalaFoto < 0.75, 'retrato desktop deve manter o enquadramento mais aberto');
               assert.equal(await page.locator('.menu-toggle').isVisible(), false);
               assert.equal(await page.locator('nav .link-contato').isVisible(), false);
             }
