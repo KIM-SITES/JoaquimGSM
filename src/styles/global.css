@@ -1,0 +1,100 @@
+@import './tokens.css';
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--grafite);
+  color: var(--texto);
+  font: 1rem / 1.55 var(--fonte);
+}
+
+h1, h2, h3, p {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+}
+
+button {
+  font: inherit;
+}
+
+img {
+  display: block;
+  max-inline-size: 100%;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+::selection {
+  color: var(--grafite);
+  background: var(--amarelo);
+}
+
+:focus-visible {
+  outline: 3px solid var(--foco);
+  outline-offset: 4px;
+}
+
+main:focus-visible {
+  outline-offset: -3px;
+}
+
+:target {
+  scroll-margin-block-start: 1rem;
+}
+
+.shell {
+  width: min(100% - 2 * var(--margem), var(--largura));
+  margin-inline: auto;
+}
+
+.indice {
+  color: var(--lavanda);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.titulo-secao {
+  font-size: var(--titulo-secao);
+  letter-spacing: -0.063em;
+  line-height: 0.99;
+  text-wrap: balance;
+}
+
+.cabecalho-secao {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 3fr);
+  gap: 1.625rem;
+  align-items: start;
+}
+
+.skip-link {
+  position: fixed;
+  z-index: 10;
+  inset: 0 auto auto var(--margem);
+  padding: 0.625rem 1rem;
+  color: var(--grafite);
+  background: var(--amarelo);
+  font-weight: 700;
+  transform: translateY(calc(-100% - 1rem));
+}
+
+.skip-link:focus {
+  transform: translateY(0.75rem);
+}
+
+@media (max-width: 900px) {
+  .cabecalho-secao {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.875rem;
+  }
+}
