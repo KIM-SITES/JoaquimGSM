@@ -1,0 +1,91 @@
+---
+import Portrait from './Portrait.astro';
+import { whatsapp } from '../data/contato';
+---
+<section class="hero" aria-labelledby="nome">
+  <Portrait />
+  <div class="hero-conteudo shell">
+    <div class="apresentacao">
+      <p class="identificacao">Desenvolvedor web independente · Brasil</p>
+      <h1 id="nome">Joaquim <br />Moura<span>.</span></h1>
+      <p class="indice">01 / Apresentação</p>
+      <h2>Sites que dão<br /> <em>presença</em> às ideias.</h2>
+      <p class="descricao">Sou desenvolvedor de sites. Crio experiências digitais personalizadas para empresas que querem apresentar melhor o que fazem.</p>
+      <div class="acoes">
+        <a class="botao botao-primario" href="#projetos">Conheça meus projetos <span aria-hidden="true">↗</span></a>
+        <a class="botao botao-secundario" href={whatsapp.url} target="_blank" rel="noopener noreferrer">Falar comigo <span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    background: var(--painel);
+  }
+
+  .hero-conteudo {
+    position: relative;
+    padding-block: 1.375rem 2.75rem;
+  }
+
+  .identificacao {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.625rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    line-height: 1.45;
+    text-transform: uppercase;
+  }
+
+  .identificacao::before {
+    flex: none;
+    width: 1.125rem;
+    height: 2px;
+    background: var(--amarelo);
+    content: '';
+  }
+
+  h1 {
+    margin-block: 1.4375rem 1.8125rem;
+    font-size: clamp(3.1875rem, 11vw, 5.5rem);
+    font-weight: 750;
+    letter-spacing: -0.065em;
+    line-height: 0.92;
+  }
+
+  h1 span, h2 em {
+    color: var(--amarelo);
+    font-style: normal;
+  }
+
+  h2 {
+    margin-block: 0.5rem 0.75rem;
+    font-size: clamp(1.8125rem, 6.3vw, 2.5rem);
+    line-height: 1.04;
+    letter-spacing: -0.045em;
+  }
+
+  .descricao {
+    max-width: 33rem;
+    color: #e1dcd7;
+    line-height: 1.55;
+  }
+
+  .acoes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.625rem;
+    margin-block-start: 1rem;
+  }
+
+  @media (max-width: 350px) {
+    .acoes > a {
+      flex-basis: 100%;
+      justify-content: space-between;
+    }
+  }
+</style>
