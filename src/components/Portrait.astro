@@ -1,0 +1,36 @@
+---
+import foto768 from '../assets/retrato-768.webp';
+import foto1200 from '../assets/retrato-1200.webp';
+import foto1536 from '../assets/retrato-1536.webp';
+
+const fontes = [foto768, foto1200, foto1536].map(({ src, width }) => src + ' ' + width + 'w').join(', ');
+---
+<img
+  class="retrato"
+  src={foto1200.src}
+  srcset={fontes}
+  sizes="100vw"
+  width={foto1536.width}
+  height={foto1536.height}
+  alt="Retrato de Joaquim Moura"
+  fetchpriority="high"
+/>
+
+<style>
+  .retrato {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 2;
+    object-fit: contain;
+  }
+
+  @media (width > 900px) {
+    .retrato {
+      position: absolute;
+      inset: 0;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+  }
+</style>
