@@ -1,0 +1,8 @@
+{
+  "manifest_version": 3,
+  "name": "Zoom para teste do portfólio",
+  "version": "1.0.0",
+  "background": {
+    "service_worker": "worker.js"
+  }
+}
