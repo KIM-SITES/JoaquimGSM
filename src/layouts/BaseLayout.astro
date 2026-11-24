@@ -2,19 +2,37 @@
 import '../styles/global.css';
 const titulo = 'Joaquim Moura — Desenvolvedor de Sites';
 const descricao = 'Joaquim Moura, desenvolvedor de sites. Projetos digitais personalizados para empresas que querem apresentar seus serviços com clareza e identidade.';
+const canonica = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : undefined;
+const caminhoCapa = '/compartilhamento.jpg';
+const capa = Astro.site ? new URL(caminhoCapa, Astro.site).href : caminhoCapa;
+const capaAlt = 'Joaquim Moura, desenvolvedor de sites, ao lado de seu retrato.';
 ---
 <!doctype html>
-<html lang="pt-BR">
+<html lang="pt-BR" prefix="og: https://ogp.me/ns#">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={descricao} />
     <meta name="theme-color" content="#242322" />
+    {canonica && <link rel="canonical" href={canonica} />}
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="pt_BR" />
+    <meta property="og:site_name" content="Joaquim Moura" />
     <meta property="og:title" content={titulo} />
     <meta property="og:description" content={descricao} />
+    {canonica && <meta property="og:url" content={canonica} />}
+    <meta property="og:image" content={capa} />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={capaAlt} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={titulo} />
+    <meta name="twitter:description" content={descricao} />
+    <meta name="twitter:image" content={capa} />
+    <meta name="twitter:image:alt" content={capaAlt} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preload" href="/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
     <title>{titulo}</title>
   </head>
   <body id="inicio">
