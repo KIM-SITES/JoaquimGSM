@@ -31,9 +31,16 @@ test('larguras, paisagem, imagens e console em Chrome, Firefox e WebKit', async 
               const excesso = [...document.querySelectorAll('h1, h2, h3, p:not(.skip-link), nav a, .botao')]
                 .filter((element) => {
                   if (!element.getClientRects().length) return false;
-                  const range = document.createRange();
-                  range.selectNodeContents(element);
-                  return [...range.getClientRects()].some((r) => r.right > innerWidth + 1 || r.left < -1);
+                  const textos = document.createTreeWalker(element, NodeFilter.SHOW_TEXT);
+                  while (textos.nextNode()) {
+                    if (textos.currentNode.parentElement.closest('.somente-leitura')) continue;
+                    const range = document.createRange();
+                    range.selectNodeContents(textos.currentNode);
+                    if ([...range.getClientRects()].some((r) => r.right > innerWidth + 1 || r.left < -1)) {
+                      return true;
+                    }
+                  }
+                  return false;
                 })
                 .map((element) => element.textContent.trim());
               return {
@@ -59,6 +66,7 @@ test('larguras, paisagem, imagens e console em Chrome, Firefox e WebKit', async 
               assert.equal(await page.locator('.menu-toggle').isVisible(), true);
             } else {
               assert.equal(layout.encaixe, 'cover');
+              assert.ok(layout.proporcao <= 1 / 0.43 + 0.01, 'enquadramento preserva o rosto inteiro');
               assert.equal(await page.locator('.menu-toggle').isVisible(), false);
               assert.equal(await page.locator('nav .link-contato').isVisible(), false);
             }
@@ -67,13 +75,15 @@ test('larguras, paisagem, imagens e console em Chrome, Firefox e WebKit', async 
               assert.equal((await principal.boundingBox()).y, (await secundario.boundingBox()).y, 'CTAs devem caber na mesma linha em 390px');
             }
 
-            const nomeCaptura = nome === 'Chrome' && new Map([[390, 'mobile'], [768, 'tablet'], [1440, 'desktop']]).get(width);
+            const nomeCaptura = nome === 'Chrome' && new Map([[390, 'mobile'], [768, 'tablet'], [1440, 'desktop'], [1920, 'widescreen']]).get(width);
             if (nomeCaptura) await page.screenshot({ path: resolve(evidencias, nomeCaptura + '-hero.png') });
             const cards = await page.locator('.captura img').all();
             assert.equal(cards.length, 3);
             for (const imagem of cards) {
               assert.equal(await imagem.getAttribute('loading'), 'lazy');
               await imagem.scrollIntoViewIfNeeded();
+              const elemento = await imagem.elementHandle();
+              await page.waitForFunction((img) => img.complete && img.naturalWidth > 0, elemento, { timeout: 5000 });
               const medida = await imagem.evaluate(async (img) => {
                 await img.decode();
                 return [img.naturalWidth, img.naturalHeight, img.width, img.height];
