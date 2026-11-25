@@ -80,7 +80,7 @@ test('larguras, paisagem, imagens e console em Chrome, Firefox e WebKit', async 
               assert.equal(layout.fotoComoFundo, true, 'retrato desktop deve acompanhar toda a altura do hero');
               assert.match(layout.transicaoFoto, /^linear-gradient\(/, 'a esquerda do retrato deve se integrar ao fundo');
               if (width >= 1280) {
-                assert.ok(layout.escalaFoto >= 0.85 && layout.escalaFoto <= 0.95, 'redução moderada da escala do retrato');
+                assert.ok(layout.escalaFoto >= 0.8 && layout.escalaFoto <= 0.85, 'escala aprovada do retrato desktop');
               }
               assert.equal(await page.locator('.menu-toggle').isVisible(), false);
               assert.equal(await page.locator('nav .link-contato').isVisible(), false);
